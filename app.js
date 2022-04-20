@@ -2,13 +2,10 @@ const express = require("express");
 require("dotenv").config();
 const app = express();
 
+const userRouter = require("./api/users/user.router");
 
-app.get("/api", (req, res) => {
-    res.json({
-        success: 1,
-        message: "esta trabajando"
-    });
-});
+app.use(express.json());
+app.use("/api/users", userRouter);
 
 
 app.listen(process.env.APPPORT,()=>{
