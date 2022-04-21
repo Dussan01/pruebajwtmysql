@@ -7,7 +7,7 @@ module.exports = {
       [
           data.first_name,
           data.last_name,
-          data.gender,
+          data.gander,
           data.email,
           data.password,
           data.number
@@ -22,19 +22,19 @@ module.exports = {
     );
   },
   getUsers: callBack => {
-      pool.query('SELECT * FROM registraction',[],
+      pool.query('SELECT * FROM registration',
       (error, results, fields) => {
           if(error){
-              recallBack(error);
+              callBack(error);
           }
           return callBack(null, results);
       })
   },
   getUserById: (id, callBack) => {
-      pool.query('SELECT * FROM registraction where id = ?',[id],
+      pool.query('SELECT * FROM registration where idUser = ?',[id],
       (error, results, fields) => {
           if(error){
-              return recallBack(error);
+              return callBack(error);
           }
           return callBack(null, results[0]);
       })
@@ -58,7 +58,7 @@ module.exports = {
     }
   },
   deleteUser: (id, callBack) => {
-      pool.query('DELETE FROM registraction where id = ?',[id],
+      pool.query('DELETE FROM registration where id = ?',[id],
       (error, results, fields) => {
           if(error){
               return recallBack(error);
@@ -66,4 +66,14 @@ module.exports = {
           return callBack(null, results[0]);
       })
   },
+
+  getUserByEmail: (email, callBack) => {
+      pool.query('SELECT * FROM registration WHERE email = ?',[email],
+      (error, results, fields) => {
+          if(error){
+            return callBack(error)
+          }
+        return callBack(null, results)
+      })
+  }
 };
