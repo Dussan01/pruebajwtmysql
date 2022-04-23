@@ -7,7 +7,7 @@ module.exports = {
       [
           data.first_name,
           data.last_name,
-          data.gander,
+          data.gender,
           data.email,
           data.password,
           data.number
@@ -72,8 +72,8 @@ module.exports = {
       (error, results, fields) => {
           if(error){
             return callBack(error)
-          }
-        return callBack(null, results)
+          }          
+        return callBack(null, results[0])
       })
   }
 };
